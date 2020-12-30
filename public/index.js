@@ -1,5 +1,19 @@
-let baseURL = 'https://alexwohlbruck.github.io/cat-facts/';
+let baseURL = 'https://catfact.ninja/fact';
 
-let quoteContainer = document.querySelector('.quoteContainer');
-let logo = document.getElementById('ronLogo');
-logo.addEventListener('click', fetchQuote);
+document.querySelector('#cat').addEventListener('click', function(event) {
+  fetchQuote();
+});
+
+window.addEventListener('load', function(event) {
+  fetchQuote();
+});
+
+function fetchQuote() {
+  fetch(baseURL)
+  .then(response => response.json())
+  .then(json => displayQuote(json))
+}
+
+function displayQuote(json) {
+  document.querySelector('.quoteBubble').innerHTML = json.fact;
+}
